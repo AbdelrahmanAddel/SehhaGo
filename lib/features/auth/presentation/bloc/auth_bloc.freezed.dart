@@ -55,13 +55,12 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthLogin value)?  login,TResult Function( _AuthSignUp value)?  signUp,TResult Function( _AuthGoogleSignIn value)?  googleSignIn,TResult Function( _AuthLogout value)?  logout,TResult Function( _AuthCheckStatus value)?  checkStatus,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthLogin value)?  login,TResult Function( _AuthSignUp value)?  signUp,TResult Function( _AuthLogout value)?  logout,TResult Function( _AuthCheckStatus value)?  checkStatus,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _AuthLogin() when login != null:
 return login(_that);case _AuthSignUp() when signUp != null:
-return signUp(_that);case _AuthGoogleSignIn() when googleSignIn != null:
-return googleSignIn(_that);case _AuthLogout() when logout != null:
+return signUp(_that);case _AuthLogout() when logout != null:
 return logout(_that);case _AuthCheckStatus() when checkStatus != null:
 return checkStatus(_that);case _:
   return orElse();
@@ -81,13 +80,12 @@ return checkStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthLogin value)  login,required TResult Function( _AuthSignUp value)  signUp,required TResult Function( _AuthGoogleSignIn value)  googleSignIn,required TResult Function( _AuthLogout value)  logout,required TResult Function( _AuthCheckStatus value)  checkStatus,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthLogin value)  login,required TResult Function( _AuthSignUp value)  signUp,required TResult Function( _AuthLogout value)  logout,required TResult Function( _AuthCheckStatus value)  checkStatus,}){
 final _that = this;
 switch (_that) {
 case _AuthLogin():
 return login(_that);case _AuthSignUp():
-return signUp(_that);case _AuthGoogleSignIn():
-return googleSignIn(_that);case _AuthLogout():
+return signUp(_that);case _AuthLogout():
 return logout(_that);case _AuthCheckStatus():
 return checkStatus(_that);case _:
   throw StateError('Unexpected subclass');
@@ -106,13 +104,12 @@ return checkStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthLogin value)?  login,TResult? Function( _AuthSignUp value)?  signUp,TResult? Function( _AuthGoogleSignIn value)?  googleSignIn,TResult? Function( _AuthLogout value)?  logout,TResult? Function( _AuthCheckStatus value)?  checkStatus,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthLogin value)?  login,TResult? Function( _AuthSignUp value)?  signUp,TResult? Function( _AuthLogout value)?  logout,TResult? Function( _AuthCheckStatus value)?  checkStatus,}){
 final _that = this;
 switch (_that) {
 case _AuthLogin() when login != null:
 return login(_that);case _AuthSignUp() when signUp != null:
-return signUp(_that);case _AuthGoogleSignIn() when googleSignIn != null:
-return googleSignIn(_that);case _AuthLogout() when logout != null:
+return signUp(_that);case _AuthLogout() when logout != null:
 return logout(_that);case _AuthCheckStatus() when checkStatus != null:
 return checkStatus(_that);case _:
   return null;
@@ -131,12 +128,11 @@ return checkStatus(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function( SignUpParams params)?  signUp,TResult Function()?  googleSignIn,TResult Function()?  logout,TResult Function()?  checkStatus,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function( SignUpParams params)?  signUp,TResult Function()?  logout,TResult Function()?  checkStatus,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthLogin() when login != null:
 return login(_that.email,_that.password);case _AuthSignUp() when signUp != null:
-return signUp(_that.params);case _AuthGoogleSignIn() when googleSignIn != null:
-return googleSignIn();case _AuthLogout() when logout != null:
+return signUp(_that.params);case _AuthLogout() when logout != null:
 return logout();case _AuthCheckStatus() when checkStatus != null:
 return checkStatus();case _:
   return orElse();
@@ -156,12 +152,11 @@ return checkStatus();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function( SignUpParams params)  signUp,required TResult Function()  googleSignIn,required TResult Function()  logout,required TResult Function()  checkStatus,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function( SignUpParams params)  signUp,required TResult Function()  logout,required TResult Function()  checkStatus,}) {final _that = this;
 switch (_that) {
 case _AuthLogin():
 return login(_that.email,_that.password);case _AuthSignUp():
-return signUp(_that.params);case _AuthGoogleSignIn():
-return googleSignIn();case _AuthLogout():
+return signUp(_that.params);case _AuthLogout():
 return logout();case _AuthCheckStatus():
 return checkStatus();case _:
   throw StateError('Unexpected subclass');
@@ -180,12 +175,11 @@ return checkStatus();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function( SignUpParams params)?  signUp,TResult? Function()?  googleSignIn,TResult? Function()?  logout,TResult? Function()?  checkStatus,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function( SignUpParams params)?  signUp,TResult? Function()?  logout,TResult? Function()?  checkStatus,}) {final _that = this;
 switch (_that) {
 case _AuthLogin() when login != null:
 return login(_that.email,_that.password);case _AuthSignUp() when signUp != null:
-return signUp(_that.params);case _AuthGoogleSignIn() when googleSignIn != null:
-return googleSignIn();case _AuthLogout() when logout != null:
+return signUp(_that.params);case _AuthLogout() when logout != null:
 return logout();case _AuthCheckStatus() when checkStatus != null:
 return checkStatus();case _:
   return null;
@@ -328,38 +322,6 @@ as SignUpParams,
 
 
 }
-
-/// @nodoc
-
-
-class _AuthGoogleSignIn implements AuthEvent {
-  const _AuthGoogleSignIn();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthGoogleSignIn);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AuthEvent.googleSignIn()';
-}
-
-
-}
-
-
-
 
 /// @nodoc
 

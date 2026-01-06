@@ -9,8 +9,6 @@ abstract class AuthRemoteDataSource {
 
   Future<UserModel> signUpWithEmailPassword({required SignUpParams params});
 
-  Future<UserModel> signInWithGoogle();
-
   Future<void> signOut();
 
   Future<UserModel> getCurrentUser();

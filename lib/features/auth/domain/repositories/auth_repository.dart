@@ -13,8 +13,6 @@ abstract class AuthRepository {
     required SignUpParams params,
   });
 
-  Future<Either<Failure, UserEntity>> signInWithGoogle();
-
   Future<Either<Failure, void>> signOut();
 
   Future<Either<Failure, UserEntity>> getCurrentUser();

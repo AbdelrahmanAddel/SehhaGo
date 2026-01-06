@@ -154,17 +154,6 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              context.read<AuthBloc>().add(const AuthEvent.googleSignIn());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-            ),
-            child: const Text('Sign in with Google'),
-          ),
         ],
       ),
     );
