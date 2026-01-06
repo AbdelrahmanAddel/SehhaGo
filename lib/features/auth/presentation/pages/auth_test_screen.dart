@@ -27,6 +27,23 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
   // Selected role (patient by default)
   UserRole selectedRole = UserRole.patient;
 
+  Future<void> _selectTime(
+    BuildContext context,
+    TextEditingController controller,
+  ) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      final hour = picked.hour.toString().padLeft(2, '0');
+      final minute = picked.minute.toString().padLeft(2, '0');
+      setState(() {
+        controller.text = '$hour:$minute';
+      });
+    }
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -122,17 +139,21 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
             const SizedBox(height: 12),
             TextField(
               controller: startTimeController,
+              readOnly: true,
+              onTap: () => _selectTime(context, startTimeController),
               decoration: const InputDecoration(
-                labelText: 'Start Time (HH:mm)',
-                hintText: '09:00',
+                labelText: 'Start Time',
+                suffixIcon: Icon(Icons.access_time),
               ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: endTimeController,
+              readOnly: true,
+              onTap: () => _selectTime(context, endTimeController),
               decoration: const InputDecoration(
-                labelText: 'End Time (HH:mm)',
-                hintText: '17:00',
+                labelText: 'End Time',
+                suffixIcon: Icon(Icons.access_time),
               ),
             ),
           ],
