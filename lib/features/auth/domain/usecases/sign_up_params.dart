@@ -9,6 +9,9 @@ class SignUpParams extends Equatable {
   final String phoneNumber;
   final UserRole role;
   final String? imageUrl;
+  final String? specialization;
+  final String? startTime;
+  final String? endTime;
 
   const SignUpParams({
     required this.email,
@@ -18,6 +21,9 @@ class SignUpParams extends Equatable {
     required this.phoneNumber,
     required this.role,
     this.imageUrl,
+    this.specialization,
+    this.startTime,
+    this.endTime,
   });
 
   @override
@@ -29,5 +35,8 @@ class SignUpParams extends Equatable {
     phoneNumber,
     role,
     imageUrl,
+    specialization,
+    startTime,
+    endTime,
   ];
 }

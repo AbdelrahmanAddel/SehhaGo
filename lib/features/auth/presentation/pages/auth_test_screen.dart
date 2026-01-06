@@ -12,11 +12,19 @@ class AuthTestScreen extends StatefulWidget {
 }
 
 class _AuthTestScreenState extends State<AuthTestScreen> {
+  // Controllers for common fields
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
+
+  // Controllers for doctor‑specific fields
+  final specializationController = TextEditingController();
+  final startTimeController = TextEditingController();
+  final endTimeController = TextEditingController();
+
+  // Selected role (patient by default)
   UserRole selectedRole = UserRole.patient;
 
   @override
@@ -26,6 +34,9 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
     firstNameController.dispose();
     lastNameController.dispose();
     phoneController.dispose();
+    specializationController.dispose();
+    startTimeController.dispose();
+    endTimeController.dispose();
     super.dispose();
   }
 
@@ -39,40 +50,19 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
             failure: (f) => ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(f.message))),
-            authenticated: (u) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Welcome ${u.user.firstName}!')),
+            authenticated: (a) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Welcome ${a.user.firstName}!')),
             ),
           );
         },
         builder: (context, state) {
+          // Show loading indicator when in loading state
           if (state.maybeMap(loading: (_) => true, orElse: () => false)) {
             return const Center(child: CircularProgressIndicator());
           }
-
-          return state.maybeMap(
-            authenticated: (state) =>
-                _buildAuthenticatedView(context, state.user.firstName),
-            orElse: () => _buildAuthForm(context),
-          );
+          // Show the auth form for all other states
+          return _buildAuthForm(context);
         },
-      ),
-    );
-  }
-
-  Widget _buildAuthenticatedView(BuildContext context, String name) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Logged in as $name'),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              context.read<AuthBloc>().add(const AuthEvent.logout());
-            },
-            child: const Text('Logout'),
-          ),
-        ],
       ),
     );
   }
@@ -81,38 +71,40 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // Email & password (common for login & sign‑up)
           TextField(
             controller: emailController,
             decoration: const InputDecoration(labelText: 'Email'),
           ),
+          const SizedBox(height: 12),
           TextField(
             controller: passwordController,
             decoration: const InputDecoration(labelText: 'Password'),
             obscureText: true,
           ),
           const SizedBox(height: 20),
-          // Sign Up Only Fields
+          // Sign‑up only fields
           TextField(
             controller: firstNameController,
-            decoration: const InputDecoration(
-              labelText: 'First Name (Sign Up only)',
-            ),
+            decoration: const InputDecoration(labelText: 'First Name'),
           ),
+          const SizedBox(height: 12),
           TextField(
             controller: lastNameController,
-            decoration: const InputDecoration(
-              labelText: 'Last Name (Sign Up only)',
-            ),
+            decoration: const InputDecoration(labelText: 'Last Name'),
           ),
+          const SizedBox(height: 12),
           TextField(
             controller: phoneController,
-            decoration: const InputDecoration(
-              labelText: 'Phone (Sign Up only)',
-            ),
+            decoration: const InputDecoration(labelText: 'Phone'),
           ),
+          const SizedBox(height: 12),
+          // Role selector
           DropdownButton<UserRole>(
             value: selectedRole,
+            isExpanded: true,
             items: UserRole.values.map((role) {
               return DropdownMenuItem(value: role, child: Text(role.name));
             }).toList(),
@@ -120,7 +112,31 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
               if (val != null) setState(() => selectedRole = val);
             },
           ),
-          const SizedBox(height: 20),
+          // Doctor‑specific extra fields – shown only when role is doctor
+          if (selectedRole == UserRole.doctor) ...[
+            const SizedBox(height: 12),
+            TextField(
+              controller: specializationController,
+              decoration: const InputDecoration(labelText: 'Specialization'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: startTimeController,
+              decoration: const InputDecoration(
+                labelText: 'Start Time (HH:mm)',
+                hintText: '09:00',
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: endTimeController,
+              decoration: const InputDecoration(
+                labelText: 'End Time (HH:mm)',
+                hintText: '17:00',
+              ),
+            ),
+          ],
+          const SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -146,6 +162,15 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
                         lastName: lastNameController.text,
                         phoneNumber: phoneController.text,
                         role: selectedRole,
+                        specialization: selectedRole == UserRole.doctor
+                            ? specializationController.text
+                            : null,
+                        startTime: selectedRole == UserRole.doctor
+                            ? startTimeController.text
+                            : null,
+                        endTime: selectedRole == UserRole.doctor
+                            ? endTimeController.text
+                            : null,
                       ),
                     ),
                   );

@@ -11,6 +11,9 @@ class UserModel extends UserEntity {
     required super.phoneNumber,
     required super.role,
     super.imageUrl,
+    super.specialization,
+    super.startTime,
+    super.endTime,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +28,9 @@ class UserModel extends UserEntity {
         orElse: () => UserRole.patient,
       ),
       imageUrl: json[FirebaseConstants.imageUrl] as String?,
+      specialization: json[FirebaseConstants.specialization] as String?,
+      startTime: json[FirebaseConstants.startTime] as String?,
+      endTime: json[FirebaseConstants.endTime] as String?,
     );
   }
 
@@ -37,6 +43,9 @@ class UserModel extends UserEntity {
       FirebaseConstants.phoneNumber: phoneNumber,
       FirebaseConstants.role: role.name,
       FirebaseConstants.imageUrl: imageUrl,
+      FirebaseConstants.specialization: specialization,
+      FirebaseConstants.startTime: startTime,
+      FirebaseConstants.endTime: endTime,
     };
   }
 
@@ -49,6 +58,9 @@ class UserModel extends UserEntity {
       phoneNumber: entity.phoneNumber,
       role: entity.role,
       imageUrl: entity.imageUrl,
+      specialization: entity.specialization,
+      startTime: entity.startTime,
+      endTime: entity.endTime,
     );
   }
 }
