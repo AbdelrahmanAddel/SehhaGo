@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sehhago/features/auth/domain/entities/user_entity.dart';
 
 class FilterDoctorUseCase {
-  List<UserEntity> filterDoctors({
+  List<UserEntity> call({
     required List<UserEntity> doctors,
     String? query,
     String? category,

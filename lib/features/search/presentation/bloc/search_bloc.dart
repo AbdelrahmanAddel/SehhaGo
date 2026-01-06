@@ -46,7 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     if (event.query == (currentState.query ?? '')) return;
 
-    final filtered = filterDoctorUseCase.filterDoctors(
+    final filtered = filterDoctorUseCase.call(
       doctors: currentState.doctors,
       query: event.query,
       category: currentState.category,
@@ -69,7 +69,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final currentState = state;
     if (currentState is! Loaded) return;
 
-    final filtered = filterDoctorUseCase.filterDoctors(
+    final filtered = filterDoctorUseCase.call(
       doctors: currentState.doctors,
       query: currentState.query ?? '',
       category: event.category ?? currentState.category,
