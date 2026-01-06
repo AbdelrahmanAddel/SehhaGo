@@ -13,4 +13,5 @@ class FirebaseConstants {
   static const String specialization = 'specialization';
   static const String startTime = 'startTime';
   static const String endTime = 'endTime';
+  static const String doctorRole = 'doctor';
 }
