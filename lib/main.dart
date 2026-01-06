@@ -19,7 +19,7 @@ void main() async {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.generateRoute,
-        home: SearchPage(),
+        home: AuthTestScreen(),
       ),
     ),
   );
