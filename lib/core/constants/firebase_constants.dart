@@ -10,4 +10,10 @@ class FirebaseConstants {
   static const String phoneNumber = 'phoneNumber';
   static const String role = 'role';
   static const String imageUrl = 'imageUrl';
+  static const String specialization = 'specialization';
+  static const String startTime = 'startTime';
+  static const String endTime = 'endTime';
+
+  // Role Values
+  static const String doctorRole = 'doctor';
 }

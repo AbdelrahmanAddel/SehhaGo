@@ -10,3 +10,7 @@ class ServerFailure extends Failure {
 class OfflineFailure extends Failure {
   const OfflineFailure(super.message);
 }
+
+class NetworkFailure extends Failure {
+  const NetworkFailure([super.message = 'Network Failure']);
+}
