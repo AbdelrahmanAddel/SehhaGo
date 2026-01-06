@@ -93,6 +93,9 @@ class AuthFirebaseRemoteDataSource implements AuthRemoteDataSource {
         phoneNumber: params.phoneNumber,
         role: params.role,
         imageUrl: params.imageUrl,
+        specialization: params.specialization,
+        startTime: params.startTime,
+        endTime: params.endTime,
       );
 
       await _saveUserData(user);
