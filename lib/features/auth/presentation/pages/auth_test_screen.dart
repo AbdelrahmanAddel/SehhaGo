@@ -174,23 +174,45 @@ class _AuthTestScreenState extends State<AuthTestScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  // Basic validation for doctor fields
+                  if (selectedRole == UserRole.doctor) {
+                    if (specializationController.text.trim().isEmpty ||
+                        startTimeController.text.trim().isEmpty ||
+                        endTimeController.text.trim().isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Please fill all doctor-specific fields (Specialization, Start & End Time)',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+                  }
+
                   context.read<AuthBloc>().add(
                     AuthEvent.signUp(
                       params: SignUpParams(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        firstName: firstNameController.text,
-                        lastName: lastNameController.text,
-                        phoneNumber: phoneController.text,
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                        firstName: firstNameController.text.trim(),
+                        lastName: lastNameController.text.trim(),
+                        phoneNumber: phoneController.text.trim(),
                         role: selectedRole,
-                        specialization: selectedRole == UserRole.doctor
-                            ? specializationController.text
+                        specialization:
+                            selectedRole == UserRole.doctor &&
+                                specializationController.text.trim().isNotEmpty
+                            ? specializationController.text.trim()
                             : null,
-                        startTime: selectedRole == UserRole.doctor
-                            ? startTimeController.text
+                        startTime:
+                            selectedRole == UserRole.doctor &&
+                                startTimeController.text.trim().isNotEmpty
+                            ? startTimeController.text.trim()
                             : null,
-                        endTime: selectedRole == UserRole.doctor
-                            ? endTimeController.text
+                        endTime:
+                            selectedRole == UserRole.doctor &&
+                                endTimeController.text.trim().isNotEmpty
+                            ? endTimeController.text.trim()
                             : null,
                       ),
                     ),
